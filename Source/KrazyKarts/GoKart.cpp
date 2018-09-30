@@ -69,6 +69,7 @@ void AGoKart::MoveForward(float Value)
 	if (MovementComponent == nullptr) return;
 
 	MovementComponent->SetThrottle(Value);
+	UE_LOG(LogTemp, Warning, TEXT("Hey"));
 }
 
 
