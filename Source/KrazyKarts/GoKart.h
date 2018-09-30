@@ -24,6 +24,7 @@ struct FGoKartMove
 	float Time;
 };
 
+
 USTRUCT()
 struct FGoKartState
 {
@@ -61,8 +62,7 @@ public:
 
 
 private:
-
-	void SimulateMove(FGoKartMove Move);
+	void SimulateMove(const FGoKartMove& Move);
 
 	FGoKartMove CreateMove(float DeltaTime);
 	void ClearAcknowledgeMoves(FGoKartMove LastMove);
@@ -99,7 +99,7 @@ private:
 
 	UFUNCTION(Server, Reliable, WithValidation)
 	void Server_SendMove(FGoKartMove Move);
-	
+
 	UPROPERTY(ReplicatedUsing = OnRep_ServerState)
 	FGoKartState ServerState;
 
@@ -108,12 +108,8 @@ private:
 	UFUNCTION()
 	void OnRep_ServerState();
 
-	UPROPERTY(Replicated)
 	float Throttle;
-	
-	UPROPERTY(Replicated)
 	float SteeringThrow;
 
 	TArray<FGoKartMove> UnacknowledgedMoves;
-	
 };
